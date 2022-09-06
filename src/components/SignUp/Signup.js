@@ -7,8 +7,8 @@ export default function Signup() {
         <Wrapper>
             <h1>MyWallet</h1>
             <FormSignup/>
-            <Link to="/signup">
-            <span>Primeira vez? Cadastre-se!</span>
+            <Link to="/">
+            <span>Já tem uma conta? Entre agora!</span>
             </Link>
         </Wrapper>
     )
@@ -33,4 +33,4 @@ h1 {
     font-family: 'Saira Stencil One', cursive;
 }
     
-    `
+`

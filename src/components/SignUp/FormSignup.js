@@ -54,7 +54,7 @@ export default function FormSignup() {
                 name: e.target.name,
                 value: e.target.value,
             }))}/>
-            <LargeButton text="Entrar" type="submit"/>
+            <LargeButton text="Cadastrar" type="submit"/>
         </form>
         </Form>
     )
