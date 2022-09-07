@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import exit from "../../assets/Exit.png";
 import FinList from "./FinList";
@@ -10,7 +11,9 @@ export default function Home() {
 
             <TopBar>
                 <h2>Olá, Ronaaaldo</h2>
+                <Link to="/">
                 <img src={exit} alt="exit" />
+                </Link>
             </TopBar>
             <FinList />
 

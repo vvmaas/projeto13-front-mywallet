@@ -38,6 +38,7 @@ const Button = styled.div`
     border-radius: 5px;
     padding: 9px;
     width: 43vw;
+    height: 16vh;
     cursor: pointer;
 img {
     height: 25px;
