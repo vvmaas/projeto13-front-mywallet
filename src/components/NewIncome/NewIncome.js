@@ -1,12 +1,16 @@
-import { useState } from "react"
+import { useState, useContext } from "react"
 import { useNavigate } from "react-router-dom"
+import dayjs from "dayjs"
 import styled from "styled-components"
+import UserContext from "../../contexts/UserContext"
+import { postUpdate } from "../../service/AxiosService"
 import LargeButton from "../LargeButton"
 
 export default function NewExpense() {
 
     const [form, setForm] = useState({})
     const navigate = useNavigate()
+    const {user} = useContext(UserContext)
 
     function handleForm({ name, value }){
         console.log(name, value)
@@ -19,13 +23,18 @@ export default function NewExpense() {
     function sendForm(e) {
         e.preventDefault();
         console.log(form);
+        if (Number(form.value) <= 0) {
+            alert('O valor deve ser maior que zero.')
+            return
+        }
         const body = {
             ...form,
+            type: "income",
+            date: `${dayjs().day()}/${dayjs().month()}`
         }
-        navigate('/home')
-        //const promise = logIn(body)
-       // promise.then((res) => {setUser(res.data); navigate('/home');})
-      //  promise.catch(() => {alert('Dados inválidos, tente novamente');})
+        const promise = postUpdate(body, user.token)
+        promise.then(() => {navigate('/home');})
+        promise.catch(() => {alert('Dados inválidos, tente novamente');})
 
     }
     
@@ -36,7 +45,7 @@ export default function NewExpense() {
             </TopBar>
 
             <Form>
-        <form onSubmit={sendForm} autocomplete="off">
+        <form onSubmit={sendForm} autoComplete="off">
             <input type="number" name="value" placeholder=' Valor' required
             onChange={(e => handleForm({
                 name: e.target.name,

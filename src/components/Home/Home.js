@@ -1,3 +1,5 @@
+import { useContext } from "react";
+import UserContext from "../../contexts/UserContext";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import exit from "../../assets/Exit.png";
@@ -6,17 +8,17 @@ import ButtonsWrapper from "./ButtonsWrapper";
 
 
 export default function Home() {
+    const {user} = useContext(UserContext)
     return (
         <Wrapper>
 
             <TopBar>
-                <h2>Olá, Ronaaaldo</h2>
+                <h2>Olá, {user.name}</h2>
                 <Link to="/">
                 <img src={exit} alt="exit" />
                 </Link>
             </TopBar>
             <FinList />
-
             <ButtonsWrapper />
 
         </Wrapper>

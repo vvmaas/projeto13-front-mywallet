@@ -20,13 +20,16 @@ export default function FormSignup() {
     function sendForm(e) {
         e.preventDefault();
         console.log(form);
+        if (form.password !== form.confirm_password){
+            alert("Senhas não correspondem. Verifique seus dados.")
+            return
+        }
         const body = {
             ...form,
         }
-        navigate('/')
-        //const promise = signUp(body)
-       // promise.then((res) => {setUser(res.data); navigate('/');})
-      //  promise.catch(() => {alert('Dados inválidos, tente novamente');})
+        const promise = signUp(body)
+        promise.then(() => {navigate('/');})
+        promise.catch(() => {alert('Dados inválidos, tente novamente');})
 
     }
 
@@ -49,7 +52,7 @@ export default function FormSignup() {
                 name: e.target.name,
                 value: e.target.value,
             }))}/>
-            <input type="password" name="confirm password" placeholder=' Confirme a senha' required
+            <input type="password" name="confirm_password" placeholder=' Confirme a senha' required
             onChange={(e => handleForm({
                 name: e.target.name,
                 value: e.target.value,

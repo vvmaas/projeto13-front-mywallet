@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import UserContext from "../../contexts/UserContext";
 import {logIn} from "../../service/AxiosService"
 import LargeButton from "../LargeButton";
 import styled from "styled-components";
@@ -7,6 +8,7 @@ import styled from "styled-components";
 export default function FormLogin() {
 
     const [form, setForm] = useState({})
+    const {setUser} = useContext(UserContext)
     const navigate = useNavigate()
 
     function handleForm({ name, value }){
@@ -23,10 +25,9 @@ export default function FormLogin() {
         const body = {
             ...form,
         }
-        navigate('/home')
-        //const promise = logIn(body)
-       // promise.then((res) => {setUser(res.data); navigate('/home');})
-      //  promise.catch(() => {alert('Dados inválidos, tente novamente');})
+        const promise = logIn(body)
+        promise.then((res) => {setUser(res.data); navigate('/home');console.log(res.data)})
+        promise.catch(() => {alert('Dados inválidos, tente novamente');})
 
     }
 
