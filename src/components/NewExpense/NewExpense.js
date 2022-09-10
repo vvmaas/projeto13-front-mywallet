@@ -24,10 +24,17 @@ export default function NewExpense() {
     function sendForm(e) {
         e.preventDefault();
         console.log(form);
+
+        if(isNaN(form.value)){
+            alert('O valor deve ser um número')
+            return
+        }
+
         if (Number(form.value) <= 0) {
             alert('O valor deve ser maior que zero.')
             return
         }
+
         const body = {
             ...form,
             type: "expense",
@@ -46,8 +53,8 @@ export default function NewExpense() {
             </TopBar>
 
             <Form>
-        <form onSubmit={sendForm} autocomplete="off">
-            <input type="number" name="value" placeholder=' Valor' required
+        <form onSubmit={sendForm} autoComplete="off">
+            <input type="text" name="value" placeholder=' Valor' required
             onChange={(e => handleForm({
                 name: e.target.name,
                 value: e.target.value,
